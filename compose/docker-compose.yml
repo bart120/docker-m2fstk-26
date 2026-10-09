@@ -21,10 +21,10 @@ services: #container
     image: mysql:latest
     container_name: db
     environment:
-      - MYSQL_ROOT_PASSWORD=bob
-      - MYSQL_DATABASE=wordpress
-      - MYSQL_USER=toto
-      - MYSQL_PASSWORD=toto
+      - MYSQL_ROOT_PASSWORD=${ROOT_PWD}
+      - MYSQL_DATABASE=${WP_DB}
+      - MYSQL_USER=${WP_USER}
+      - MYSQL_PASSWORD=${WP_PWD}
     networks:
       - backend
     volumes:
@@ -36,7 +36,7 @@ services: #container
     ports:
       - "8080:80"
     environment:
-      - MYSQL_ROOT_PASSWORD=bob
+      - MYSQL_ROOT_PASSWORD=${ROOT_PWD}
       - PMA_HOST=database
       - PMA_PORT=3306 #pas obligatoire si la base écoute en 3306
     networks:
@@ -44,15 +44,15 @@ services: #container
       - frontend
 
   wordpress:
-    image: wordpress:latest
+    image: ${WP_IMAGE}
     container_name: wordpress
     ports:
       - "80:80"
     environment:
       - WORDPRESS_DB_HOST=database
-      - WORDPRESS_DB_USER=toto
-      - WORDPRESS_DB_PASSWORD=toto
-      - WORDPRESS_DB_NAME=wordpress
+      - WORDPRESS_DB_USER=${WP_USER}
+      - WORDPRESS_DB_PASSWORD=${WP_PWD}
+      - WORDPRESS_DB_NAME=${WP_DB}
     networks:
       - backend
       - frontend
