@@ -1,0 +1,34 @@
+networks:
+  backend:
+    name: backend-network
+    external: false
+  frontend:
+    name: frontend-network
+
+
+services: #container
+# docker run --name:db -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=bob -e MYSQL_DATABASE=wordpress 
+# -e MYSQL_USER=toto -e MYSQL_PASSWORD=toto mysql:latest
+  database:
+    image: mysql:latest
+    container_name: db
+    environment:
+      - MYSQL_ROOT_PASSWORD=bob
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=toto
+      - MYSQL_PASSWORD=toto
+    networks:
+      - backend
+
+  myadmin:
+    image: phpmyadmin:5.2.3-apache
+    container_name: phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      - MYSQL_ROOT_PASSWORD=bob
+      - PMA_HOST=database
+      - PMA_PORT=3306 #pas obligatoire si la base écoute en 3306
+    networks:
+      - backend
+      - frontend
