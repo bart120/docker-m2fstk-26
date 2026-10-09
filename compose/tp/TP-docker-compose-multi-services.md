@@ -14,7 +14,7 @@ L'objectif est de conteneuriser chaque composant puis d'orchestrer l'ensemble av
 
 L'application est composée de quatre éléments :
 
-- un **frontend React** situé dans le dossier `front` ;
+- un **frontend next** situé dans le dossier `front` ;
 - un **backend Node.js / Express** situé dans le dossier `back` ;
 - une **base de données PostgreSQL** ;
 - un **reverse proxy Nginx** chargé de distribuer les requêtes vers le frontend et le backend.
@@ -60,7 +60,7 @@ Vous devez mettre en place l'architecture suivante :
                    v         v
             +----------+   +----------+
             | Frontend |   | Backend  |
-            |  React   |   | Express  |
+            |  next   |   | Express  |
             +----------+   +----------+
                                |
                                |
@@ -84,7 +84,7 @@ Une fois l'environnement démarré, les URLs suivantes doivent fonctionner :
 http://localhost/
 ```
 
-Accès au frontend React.
+Accès au frontend next.
 
 ```text
 http://localhost/api1
@@ -132,7 +132,7 @@ L'arborescence exacte peut être adaptée si nécessaire.
 
 # 5. Étape 1 — Préparer les images des applications
 
-## 5.1 Frontend React
+## 5.1 Frontend next
 
 Le frontend est fourni dans le dossier :
 
@@ -146,7 +146,7 @@ Vous devez créer un fichier :
 front/Dockerfile
 ```
 
-L'image finale doit permettre de servir l'application React.
+L'image finale doit permettre de servir l'application next.
 
 ### Travail demandé
 
@@ -157,7 +157,7 @@ Le Dockerfile du frontend devra notamment :
 3. copier les fichiers nécessaires à l'installation des dépendances ;
 4. installer les dépendances ;
 5. copier le code source ;
-6. construire l'application React ;
+6. construire l'application next ;
 7. rendre l'application disponible dans le conteneur.
 
 Vous êtes libres de choisir entre :
@@ -167,7 +167,7 @@ Vous êtes libres de choisir entre :
 
 ### Recommandation
 
-Pour une application React destinée à la production, un multi-stage build est généralement plus adapté :
+Pour une application next destinée à la production, un multi-stage build est généralement plus adapté :
 
 ```text
 Étape 1
@@ -203,8 +203,8 @@ docker images
 
 1. Pourquoi est-il préférable de copier `package.json` avant le reste du code source ?
 2. Quel est l'intérêt du cache Docker lors d'un `npm install` ?
-3. Quel avantage apporte un multi-stage build pour une application React ?
-4. Le frontend React a-t-il besoin de Node.js dans l'image finale après le build ?
+3. Quel avantage apporte un multi-stage build pour une application next ?
+4. Le frontend next a-t-il besoin de Node.js dans l'image finale après le build ?
 
 ---
 
@@ -739,7 +739,7 @@ Testez les URLs demandées.
 http://localhost/
 ```
 
-Le frontend React doit s'afficher.
+Le frontend next doit s'afficher.
 
 ## API 1
 
@@ -1008,7 +1008,7 @@ L'architecture finale doit respecter le fonctionnement suivant :
                        v         v
                 +----------+  +----------+
                 | Frontend |  | Backend  |
-                |  React   |  | Express  |
+                |  next   |  | Express  |
                 +----------+  +----------+
                                   |
                                   v
