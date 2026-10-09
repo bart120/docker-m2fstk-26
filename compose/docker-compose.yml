@@ -5,6 +5,14 @@ networks:
   frontend:
     name: frontend-network
 
+volumes:
+  mysql-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind #addr:58.65.321.5
+      device: D:\docker\data\mysql_data_volume
+
 
 services: #container
 # docker run --name:db -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=bob -e MYSQL_DATABASE=wordpress 
@@ -19,6 +27,8 @@ services: #container
       - MYSQL_PASSWORD=toto
     networks:
       - backend
+    volumes:
+      - mysql-data:/var/lib/mysql
 
   myadmin:
     image: phpmyadmin:5.2.3-apache
