@@ -42,3 +42,20 @@ services: #container
     networks:
       - backend
       - frontend
+
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress
+    ports:
+      - "80:80"
+    environment:
+      - WORDPRESS_DB_HOST=database
+      - WORDPRESS_DB_USER=toto
+      - WORDPRESS_DB_PASSWORD=toto
+      - WORDPRESS_DB_NAME=wordpress
+    networks:
+      - backend
+      - frontend
+    volumes:
+      - D:\docker\data\wordpress_volume:/var/www/html
+    
